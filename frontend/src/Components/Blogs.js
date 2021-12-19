@@ -13,7 +13,7 @@ export default class Blogs extends Component {
 
     componentDidMount()
     {
-        axios.get('/blog/blog_list')
+        axios.get('http://localhost:8000/blog/blog_list')
             .then((response) => {
                 this.setState({
                     blog_list: response.data,
