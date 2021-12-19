@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'rest_framework',
+    'reacttools',
+    'django.contrib.sites',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +125,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.getenv('STATIC_ROOT',os.path.join(BASE_DIR,'static'))
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']
+}
+
+# CORS_ORIGIN_ALLOW_ALL = True
+
+# React tools
+
+REACT_PROJECT_DIRECTORY = os.path.join(Path(__file__).resolve().parent.parent.parent, 'frontend')
+
+# REACT_DJANGO_DEST = STATIC_ROOT
+
+# REACT_BUILD_COMMAND = "npm run-script build"
+
+# REACT_MANIFEST_FILE = os.getenv('REACT_MANIFEST_FILE',"asset-manifest.json")
+
+# REACT_DEV_MODE = False
+
+# SITE_ID = 1
