@@ -16,9 +16,3 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = '__all__'
-
-class BlogListSerializer(BlogSerializer):
-    content = serializers.SerializerMethodField()
-
-    def get_content(self,obj):
-        return obj.content[:500]

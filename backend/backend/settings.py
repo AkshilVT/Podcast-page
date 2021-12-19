@@ -27,7 +27,7 @@ SECRET_KEY = 'ks3yr9jwpguxys392h=w2#q^5aadp77y_0^4w-2)v4anpi%zx&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'rest_framework',
-    'reacttools',
     'django.contrib.sites',
-    'home',
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -54,7 +54,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -127,23 +131,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.getenv('STATIC_ROOT',os.path.join(BASE_DIR,'static'))
 
+MEDIA_URL= '/media/'
+MEDIA_ROOT = os.getenv('MEDIA_ROOT',os.path.join(BASE_DIR, 'media'))
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']
 }
-
-# CORS_ORIGIN_ALLOW_ALL = True
-
-# React tools
-
-REACT_PROJECT_DIRECTORY = os.path.join(Path(__file__).resolve().parent.parent.parent, 'frontend')
-
-# REACT_DJANGO_DEST = STATIC_ROOT
-
-# REACT_BUILD_COMMAND = "npm run-script build"
-
-# REACT_MANIFEST_FILE = os.getenv('REACT_MANIFEST_FILE',"asset-manifest.json")
-
-# REACT_DEV_MODE = False
-
-# SITE_ID = 1

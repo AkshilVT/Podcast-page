@@ -34,7 +34,7 @@ export default class Blogs extends Component {
                     <div>
                         <h1>{individualBlogs.title}</h1>
                         {/* <h1>{individualBlogs.id}</h1> */}
-                        <img src={individualBlogs.img} alt="Trial_Image" />
+                        <img src={individualBlogs.image} alt="Trial_Image" />
                         <p>{individualBlogs.content}</p>
                     </div>
             })

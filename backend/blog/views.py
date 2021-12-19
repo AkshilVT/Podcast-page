@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Blog
-from .serializer import BlogListSerializer
+from .serializer import BlogSerializer
 
 
 # Create your views here.
@@ -11,7 +11,7 @@ def blog_list(request):
     """ Returns dict of all the blogs"""
 
     return Response(
-        BlogListSerializer(
+        BlogSerializer(
 
             Blog.objects.all(),
             context={"request": request},
