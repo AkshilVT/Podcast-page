@@ -1,9 +1,24 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+function RenderBlogs({ blog_list }) {
+    let bl = blog_list.map((individualBlogs) => {
+        console.log(JSON.stringify(individualBlogs));
+        return (
+            <div>
+                <h1>{individualBlogs.title}</h1>
+                {/* <h1>{individualBlogs.id}</h1> */}
+                <img src={individualBlogs.image} alt="Trial_Image" />
+                <p>{individualBlogs.content}</p>
+            </div>
+        )
+    })
+
+    return(bl);
+}
+
 export default class Blogs extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -11,8 +26,7 @@ export default class Blogs extends Component {
         }
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         axios.get('http://localhost:8000/blog/blog_list')
             .then((response) => {
                 this.setState({
@@ -26,18 +40,10 @@ export default class Blogs extends Component {
 
     render() {
         let renderBlogs;
-        if(this.state.blog_list.length !== 0)
-        {
+        if (this.state.blog_list.length !== 0) {
             // eslint-disable-next-line array-callback-return
-            this.state.blog_list.map((individualBlogs) => {
-                renderBlogs = 
-                    <div>
-                        <h1>{individualBlogs.title}</h1>
-                        {/* <h1>{individualBlogs.id}</h1> */}
-                        <img src={individualBlogs.image} alt="Trial_Image" />
-                        <p>{individualBlogs.content}</p>
-                    </div>
-            })
+
+            renderBlogs = <RenderBlogs blog_list={this.state.blog_list} />
         }
         return (
             <div>
