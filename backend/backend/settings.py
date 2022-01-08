@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'podcast',
     'rest_framework',
     'django.contrib.sites',
     'corsheaders',
@@ -126,15 +127,18 @@ USE_TZ = True
 
 SITE_ID = 1
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000'
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.getenv('STATIC_ROOT',os.path.join(BASE_DIR,'static'))
+STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
 
-MEDIA_URL= '/media/'
-MEDIA_ROOT = os.getenv('MEDIA_ROOT',os.path.join(BASE_DIR, 'media'))
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']
