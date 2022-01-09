@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-function RenderBlogs({ blog_list }) {
-  let bl = blog_list.map((individualBlogs) => {
+function RenderPodcast({ podcast_list }) {
+  let bl = podcast_list.map((individualBlogs) => {
     console.log(JSON.stringify(individualBlogs));
     return (
       <div className='blog'>
@@ -13,7 +13,7 @@ function RenderBlogs({ blog_list }) {
           src={individualBlogs.image}
           alt='Trial_Image'
         />
-        <p>{individualBlogs.content}</p>
+        <p>{individualBlogs.description}</p>
       </div>
     );
   });
@@ -21,34 +21,34 @@ function RenderBlogs({ blog_list }) {
   return bl;
 }
 
-export default class Blogs extends Component {
+export default class Podcast extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      blog_list: [],
+      podcast_list: [],
     };
   }
 
   componentDidMount() {
     axios
-      .get('http://localhost:8000/blog/blog_list')
+      .get('http://localhost:8000/api/podcasts')
       .then((response) => {
         this.setState({
-          blog_list: response.data,
+          podcast_list: response.data,
         });
       })
       .catch((err) => {
+        console.log(err);
         alert('Something went wrong!');
       });
   }
-
   render() {
     let renderBlogs;
-    if (this.state.blog_list.length !== 0) {
+    if (this.state.podcast_list.length !== 0) {
       // eslint-disable-next-line array-callback-return
 
-      renderBlogs = <RenderBlogs blog_list={this.state.blog_list} />;
+      renderBlogs = <RenderPodcast blog_list={this.state.podcast_list} />;
     }
     return <div>{renderBlogs}</div>;
   }
